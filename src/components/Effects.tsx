@@ -10,9 +10,20 @@ export function Effects() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
+    // pause the logo marquee while it's off screen
+    const track = document.querySelector(".track");
+    const mio =
+      track && "IntersectionObserver" in window
+        ? new IntersectionObserver(([e]) => track.classList.toggle("off", !e.isIntersecting))
+        : null;
+    if (track && mio) mio.observe(track);
+
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce || !("IntersectionObserver" in window)) {
-      return () => window.removeEventListener("scroll", onScroll);
+      return () => {
+        window.removeEventListener("scroll", onScroll);
+        mio?.disconnect();
+      };
     }
     document.documentElement.classList.add("anim");
 
@@ -55,6 +66,7 @@ export function Effects() {
     return () => {
       window.removeEventListener("scroll", onScroll);
       io.disconnect();
+      mio?.disconnect();
       window.clearTimeout(safety);
     };
   }, []);

@@ -2,10 +2,7 @@
 
 Personal site of Manas Rathi, founding GTM engineer for B2B SaaS and AI startups.
 
-Next.js (App Router), plain CSS, no UI framework. The hero is a port of the Candio hero:
-a cutout photo in front of a disc, and a pill whose "Work with me" side makes the stack
-and results pop out from behind. Springs are CSS `linear()` curves matching the original
-Framer Motion settings.
+Next.js (App Router), plain CSS, no UI framework. The hero is a simple two-column layout (pitch left, photo and an Upwork review right).
 
 ## Run locally
 

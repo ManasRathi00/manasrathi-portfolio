@@ -30,29 +30,6 @@ export default function Home() {
       <main>
         <Hero />
 
-        <div className="hero-intro">
-          <div className="wrap">
-            <p className="rv">
-              I set up how B2B startups get customers. Outbound that books meetings, search that gets you found
-              on Google and ChatGPT, and analytics that shows which one brought the deal.
-            </p>
-            <div className="ctas rv" style={d(1)}>
-              <a className="btn btn-accent" href={site.bookingUrl || "#contact"}>
-                Get a free GTM teardown <span className="arr">→</span>
-              </a>
-              <a className="btn btn-line" href="#results">
-                See results
-              </a>
-            </div>
-            <div className="regions rv" style={d(2)}>
-              <span>Working with founders in</span>
-              {site.regions.map((r) => (
-                <span key={r}>{r}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-
         <div className="marquee" aria-label="Tools I build with">
           <p>Built on the tools you already pay for, plus code where they fall short</p>
           <div className="track">
