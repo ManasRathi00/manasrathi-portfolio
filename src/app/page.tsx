@@ -1,31 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 import { Hero } from "@/components/Hero";
 import { CopyEmail, Effects } from "@/components/Effects";
-import { faqs, logo, marquee, site, stackGroups, tools } from "@/lib/site";
+import { SiteFooter, SiteNav } from "@/components/Chrome";
+import { caseStudies, faqs, logo, marquee, site, stackGroups, testimonials, tools, upworkStats } from "@/lib/site";
 
 const d = (i: number) => ({ ["--i" as string]: i }) as React.CSSProperties;
 
 export default function Home() {
   return (
     <>
-      <nav className="nav" id="nav">
-        <div className="wrap">
-          <a className="logo" href="#top">
-            <span className="mark">MR</span>
-            {site.name}
-          </a>
-          <div className="links">
-            <a href="#services">Services</a>
-            <a href="#results">Results</a>
-            <a href="#process">Process</a>
-            <a href="#stack">Stack</a>
-            <a href="#faq">FAQ</a>
-          </div>
-          <a className="btn btn-primary" href="#contact">
-            Get a free teardown
-          </a>
-        </div>
-      </nav>
+      <SiteNav />
 
       <main>
         <Hero />
@@ -185,26 +169,19 @@ export default function Home() {
               <p>Clients stay anonymous unless they&apos;ve said otherwise.</p>
             </div>
             <div className="cases">
-              <article className="case rv">
-                <div className="big" data-count="150">150</div>
-                <h3>paying customers from cold email</h3>
-                <p>
-                  A US financial data company selling API products to CEOs and founders. I ran it end to end:
-                  lists from Apollo, qualified with Exa and custom AI, verified with Findymail and ZeroBounce,
-                  first lines in Clay, sent from Instantly on domains I set up.
-                </p>
-                <div className="metrics"><span>7,000 prospects</span><span>45% open</span><span>2.5% reply</span><span>2.5 months</span></div>
-              </article>
+              {caseStudies.map((c, i) => (
+                <a className="case rv" style={d(i % 2)} href={`/case-studies/${c.slug}`} key={c.slug}>
+                  <div className="big">{c.metric}</div>
+                  <h3>{c.metricLabel}</h3>
+                  <p>{c.summary}</p>
+                  <div className="metrics">
+                    <span>{c.industry}</span>
+                    <span>{c.duration}</span>
+                  </div>
+                  <span className="case-link">Read the case study →</span>
+                </a>
+              ))}
               <article className="case rv" style={d(1)}>
-                <div className="big" data-count="50" data-suffix="+">50+</div>
-                <h3>meetings booked on LinkedIn</h3>
-                <p>
-                  Outreach into financial media companies over two months, run on Gojiberry and my own browser
-                  automation with human pacing.
-                </p>
-                <div className="metrics"><span>5-6% reply</span><span>2 months</span><span>2 accounts</span></div>
-              </article>
-              <article className="case rv">
                 <div className="big">16<span style={{ fontSize: ".5em", opacity: 0.6 }}> / 200</span></div>
                 <h3>replies after rewriting one line</h3>
                 <p>
@@ -213,16 +190,35 @@ export default function Home() {
                 </p>
                 <div className="metrics"><span>9 calls</span><span>3 deals</span><span>10 days</span></div>
               </article>
-              <article className="case rv" style={d(1)}>
-                <div className="big" data-count="140" data-suffix="k">140k</div>
-                <h3>search impressions in 28 days</h3>
-                <p>
-                  Cruxal, my own product. Most traffic came from people asking ChatGPT why a stock moved. Five ICP
-                  meetings in the first week of outbound too.
-                </p>
-                <div className="metrics"><span>600+ weekly visitors</span><span>AI search</span><span>Search Console</span></div>
-              </article>
             </div>
+          </div>
+        </section>
+
+        <section className="reviews" id="reviews">
+          <div className="wrap">
+            <div className="head rv">
+              <span className="kicker">Reviews</span>
+              <h2>What clients said on Upwork.</h2>
+              <p>
+                {upworkStats.badge} · {upworkStats.jobSuccess} job success · {upworkStats.earned} earned ·{" "}
+                {upworkStats.hours} hours across {upworkStats.jobs} contracts.
+              </p>
+            </div>
+            <div className="review-grid">
+              {testimonials.map((t, i) => (
+                <figure className="review rv" style={d(i)} key={t.job}>
+                  <span className="stars" aria-label={`${t.rating} out of 5`}>★★★★★</span>
+                  <blockquote>&ldquo;{t.quote}&rdquo;</blockquote>
+                  <figcaption>
+                    <b>Upwork client</b>
+                    <span>{t.job}</span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+            <a className="btn btn-line rv" href={site.upwork} target="_blank" rel="noopener" style={{ marginTop: 28 }}>
+              See all reviews on Upwork <span className="arr">→</span>
+            </a>
           </div>
         </section>
 
@@ -343,12 +339,7 @@ export default function Home() {
         </div>
       </main>
 
-      <footer>
-        <div className="wrap">
-          <span>© {new Date().getFullYear()} {site.name} · Founding GTM engineer</span>
-          <span>Bengaluru · {site.regions.join(" · ")}</span>
-        </div>
-      </footer>
+      <SiteFooter />
 
       <Effects />
       <CopyEmail email={site.email} />
