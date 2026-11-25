@@ -1,0 +1,20 @@
+# Manas Rathi
+
+> Founding GTM engineer for B2B SaaS and AI startups, based in Bengaluru and working with founders in the UAE, Singapore, India and the US.
+
+Manas sets up how early-stage B2B startups get customers: outbound (signal-based lead lists, verified emails, LinkedIn and email sequences, deliverability), search (Google Search Console, technical SEO, answer-first pages so AI search tools cite the product) and analytics (site, Search Console, outbound tools and CRM connected so founders see which channel brought which deal). Engagements are a fixed three-week build with optional monthly management.
+
+## Results
+- 150 paying customers from cold email for a US financial data company: 7,000 prospects over 2.5 months, 45% open rate, 2.5% reply rate.
+- 50+ meetings booked through LinkedIn outreach into financial media companies over two months, 5-6% reply rate.
+- Cruxal (his own product): 140k search impressions and 600+ weekly visitors in 28 days, mostly from ChatGPT referrals.
+- Top Rated Plus on Upwork with 100% job success.
+
+## Tools
+Apollo, LinkedIn Sales Navigator, Exa, Apify, Clay, Findymail, ZeroBounce, Instantly, Gojiberry, HubSpot, n8n, Make, Claude Code, Playwright, Google Search Console, Google Analytics, PostHog.
+
+## Links
+- LinkedIn: https://www.linkedin.com/in/manasrathii
+- Upwork: https://www.upwork.com/freelancers/~01e032ce32a3beb12a
+- GitHub: https://github.com/ManasRathi00
+- Email: manas.rathi2@gmail.com

@@ -1,0 +1,38 @@
+# Builds the image with the public env baked in, then deploys to Cloud Run.
+# Run with: gcloud builds submit --config cloudbuild.yaml --substitutions=_SITE_URL=https://manasrathi.com,_GA_ID=G-XXXX,_GSC=token,_BOOKING=https://cal.com/...
+substitutions:
+  _REGION: asia-southeast1
+  _SERVICE: manasrathi-portfolio
+  _REPO: web
+  _SITE_URL: https://manasrathi.com
+  _GA_ID: ""
+  _GSC: ""
+  _BOOKING: ""
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -t
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:$BUILD_ID
+      - --build-arg=NEXT_PUBLIC_SITE_URL=${_SITE_URL}
+      - --build-arg=NEXT_PUBLIC_GA_ID=${_GA_ID}
+      - --build-arg=NEXT_PUBLIC_GSC_VERIFICATION=${_GSC}
+      - --build-arg=NEXT_PUBLIC_BOOKING_URL=${_BOOKING}
+      - .
+  - name: gcr.io/cloud-builders/docker
+    args: [push, "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:$BUILD_ID"]
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - ${_SERVICE}
+      - --image=${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:$BUILD_ID
+      - --region=${_REGION}
+      - --allow-unauthenticated
+      - --min-instances=0
+      - --max-instances=3
+      - --memory=512Mi
+      - --cpu=1
+images:
+  - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:$BUILD_ID
