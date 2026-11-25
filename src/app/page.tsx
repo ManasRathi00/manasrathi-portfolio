@@ -150,10 +150,10 @@ export default function Home() {
                 </div>
               </article>
               <article className="card b-ana rv">
-                <span className="included">Included every time</span>
                 <div className="ana">
                   <div style={{ display: "grid", gap: 12 }}>
                     <span className="tagline">03 · Analytics</span>
+                    <span className="included">Included every time</span>
                     <h3>See which channel brought the deal</h3>
                     <p>
                       Your site, Search Console, outbound tools and CRM connected, so on Monday morning you can
