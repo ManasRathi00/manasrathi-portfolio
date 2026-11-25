@@ -37,7 +37,7 @@ export function Hero() {
         <div className="h2-visual rv" style={d(2)}>
           <div className="h2-photo">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/manas-cutout.png" alt={site.name} width={632} height={700} />
+            <img src="/assets/manas.jpg" alt={`${site.name} at the Golden Gate Bridge`} width={880} height={1173} />
           </div>
           <figure className="h2-quote">
             <span className="stars" aria-label="5 out of 5 stars">★★★★★</span>
