@@ -29,35 +29,19 @@ Copy `.env.example` to `.env.local` and fill in what you have. Every value is op
 - Person + ProfessionalService + FAQPage schema linked to LinkedIn, Upwork and GitHub
 - Generated Open Graph image
 
-## Deploy to Cloud Run (not done yet)
+## Deploy to Cloud Run
 
-One-time setup, once the domain is bought:
-
-```bash
-gcloud projects create manasrathi-site --name="manasrathi site"
-gcloud config set project manasrathi-site
-gcloud billing projects link manasrathi-site --billing-account=YOUR_BILLING_ACCOUNT
-gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com
-gcloud artifacts repositories create web --repository-format=docker --location=asia-southeast1
-```
-
-Deploy (re-run for every release):
+Runs as its own Cloud Run service (`manasrathi-portfolio`) in the existing `cruxal-502309`
+project, next to Cruxal and Wynda: region `asia-south1`, image repo `web`.
 
 ```bash
-gcloud builds submit --config cloudbuild.yaml \
+gcloud builds submit --project cruxal-502309 --config cloudbuild.yaml \
   --substitutions=_SITE_URL=https://manasrathi.com,_GA_ID=G-XXXXXXX,_GSC=token,_BOOKING=https://cal.com/you
 ```
 
-Region is `asia-southeast1` (Singapore): close to UAE, Singapore and India, and it supports
-Cloud Run domain mappings. Min instances is 0, so the site costs close to nothing at low traffic
-(first request after idle has a short cold start).
+Min instances is 0, so the site costs close to nothing at low traffic (first request after
+idle has a short cold start).
 
-Custom domain:
-
-```bash
-gcloud domains verify manasrathi.com
-gcloud beta run domain-mappings create --service=manasrathi-portfolio --domain=manasrathi.com --region=asia-southeast1
-```
-
-Then add the DNS records it prints at your registrar. After the domain is live:
-add the property in Search Console and Bing Webmaster Tools, and submit `/sitemap.xml`.
+When the domain is live: point it at the service the same way the Cruxal and Wynda domains
+are set up, redeploy with `_SITE_URL` set to the real domain, then add the property in
+Search Console and Bing Webmaster Tools and submit `/sitemap.xml`.

@@ -1,7 +1,7 @@
 # Builds the image with the public env baked in, then deploys to Cloud Run.
 # Run with: gcloud builds submit --config cloudbuild.yaml --substitutions=_SITE_URL=https://manasrathi.com,_GA_ID=G-XXXX,_GSC=token,_BOOKING=https://cal.com/...
 substitutions:
-  _REGION: asia-southeast1
+  _REGION: asia-south1
   _SERVICE: manasrathi-portfolio
   _REPO: web
   _SITE_URL: https://manasrathi.com
